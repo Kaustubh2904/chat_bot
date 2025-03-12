@@ -11,7 +11,6 @@ genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 model=genai.GenerativeModel("gemini-1.5-pro") 
 chat = model.start_chat(history=[])
 def get_gemini_response(question):
-    
     response=chat.send_message(question,stream=True)
     return response
 
@@ -30,18 +29,27 @@ submit=st.button("Ask the question")
 
 if submit and input:
     response=get_gemini_response(input)
-    # Add user query and response to session state chat history
+    # Add user query to chat history
     st.session_state['chat_history'].append(("You", input))
+    
+    # Display streamed response while collecting full response
     st.subheader("The Response is")
+    full_response = ""
+    response_container = st.empty()
+    
     for chunk in response:
-        st.write(chunk.text)
-        st.session_state['chat_history'].append(("Bot", chunk.text))
+        full_response += chunk.text
+        response_container.write(full_response)
+    
+    # Add complete bot response to chat history
+    st.session_state['chat_history'].append(("Bot", full_response))
+
 st.subheader("The Chat History is")
     
 for role, text in st.session_state['chat_history']:
     st.write(f"{role}: {text}")
-    
 
 
 
-    
+
+
