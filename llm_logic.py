@@ -30,6 +30,7 @@ def generate_response(prompt):
     return (response.text)
 
 
-while True:
-    string= str(input("Enter your question: "))
-    print("bot : ", generate_response(string))
+# while True:
+#     string= str(input("Enter your question: "))
+#     print("bot : ", generate_response(string))
+
