@@ -11,8 +11,12 @@ def response_generator(prompt):
         yield word + " "
         time.sleep(0.05)
 
+st.set_page_config(
+    page_title="Professor AI - Your Educational Assistant",
+    page_icon="👨‍🏫"
+)
 
-st.title("Pofessor AI")
+st.title("Professor AI")
 
 # Initialize chat history
 if "messages" not in st.session_state:
