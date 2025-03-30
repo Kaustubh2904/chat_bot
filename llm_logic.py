@@ -3,7 +3,6 @@ load_dotenv()
 
 import os
 import google.generativeai as genai
-import weave
 
 genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
 
@@ -20,7 +19,7 @@ model = genai.GenerativeModel(
   generation_config=generation_config,
 )
 
-@weave.op() ##tracks api usage for billing
+
 def generate_response(prompt):
     response = model.generate_content([
     "You are a teaching chatbot with an understanding of all subjects. Your goal is to help students learn concepts clearly and also aid in doing their homework by helping them build intution to solve a problem. Keep your answers brief, focused and to the point.\nExplain topics concisely but accurately.\nUse simple language and short examples.\n\nFocus on the important points.",
